@@ -1,0 +1,65 @@
+name: stagepipelineank
+
+pool: Default
+
+trigger: none
+stages:
+  - stage: stage1
+    displayName: stage1pipeline
+    jobs:
+      - job: Job1
+        displayName: terraforminitplan
+        steps:
+        - task: TerraformTaskV4@4
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/Env/dev'
+            backendServiceArm: 'Ashok1'
+            backendAzureRmResourceGroupName: 'pkrg'
+            backendAzureRmStorageAccountName: 'merapehlastorage'
+            backendAzureRmContainerName: 'newcant'
+            backendAzureRmKey: 'stage.dev.tfstate'
+        - task: TerraformTaskV4@4
+          inputs:
+            provider: 'azurerm'
+            command: 'plan'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/Env/dev'
+            environmentServiceNameAzureRM: 'Ashok1'
+
+  - stage: stage2
+    displayName: stage2pipeline
+    jobs:
+      - job: manualapproval
+        displayName: manualapproval
+        pool: Server
+        steps:
+        - task: ManualValidation@1
+          inputs:
+            notifyUsers: 'abc@abc.com'
+
+  - stage: stage3
+    displayName: stage3pipeline
+    pool: Default
+    dependsOn: stage2
+    jobs:
+      - job: Job2
+        displayName: terraformapply
+        steps:
+        - task: TerraformTaskV4@4
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/Env/dev'
+            backendServiceArm: 'Ashok1'
+            backendAzureRmResourceGroupName: 'pkrg'
+            backendAzureRmStorageAccountName: 'merapehlastorage'
+            backendAzureRmContainerName: 'newcant'
+            backendAzureRmKey: 'stage.dev.tfstate'
+
+        - task: TerraformTaskV4@4
+          inputs:
+            provider: 'azurerm'
+            command: 'apply'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/Env/dev'
+            environmentServiceNameAzureRM: 'Ashok1'

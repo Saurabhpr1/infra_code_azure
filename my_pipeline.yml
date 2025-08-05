@@ -1,0 +1,46 @@
+name: project_test_pipeline
+
+trigger:
+  branches:
+    include:
+      - feature
+    exclude:
+      - main*
+  paths:
+    include:
+      - Env/dev
+    exclude:
+      - Env/prod
+
+pool: Default
+
+steps:
+- task: TerraformInstaller@1
+  displayName: "Terraform installer"
+  inputs:
+    terraformVersion: 'latest'
+- task: TerraformTaskV4@4
+  displayName: "Terraform init"
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    workingDirectory: "$(System.DefaultWorkingDirectory)/Env/dev"
+    backendServiceArm: 'Ashok1'
+    backendAzureRmResourceGroupName: 'storageRGroup'
+    backendAzureRmStorageAccountName: 'strgergdemo1'
+    backendAzureRmContainerName: 'container1'
+    backendAzureRmKey: 'dev.terraform'
+- task: TerraformTaskV4@4
+  displayName: "Terraform plan"
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/Env/dev'
+    environmentServiceNameAzureRM: 'Ashok1'
+- task: TerraformTaskV4@4
+  displayName: "Terraform apply"
+  inputs:
+    provider: 'azurerm'
+    command: 'apply'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/Env/dev'
+    environmentServiceNameAzureRM: 'Ashok1'

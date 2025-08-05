@@ -1,0 +1,64 @@
+name: "Ankpipeline1"
+
+pool: Default
+
+trigger: none
+
+jobs:
+- job: Job1
+  steps:
+  - task: TerraformInstaller@1
+    inputs:
+      terraformVersion: 'latest'
+  - task: TerraformTaskV4@4
+    displayName: "Terraforminitplan"
+    inputs:
+      provider: 'azurerm'
+      command: 'init'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/Env/dev'
+      backendServiceArm: 'Ashok1'
+      backendAzureRmResourceGroupName: 'pkrg'
+      backendAzureRmStorageAccountName: 'mystorage12345126'
+      backendAzureRmContainerName: 'pkcontainer'
+      backendAzureRmKey: 'dev.terraform.tfstate'
+
+  - task: TerraformTaskV4@4
+    displayName: "Terraforminitplan"
+    inputs:
+      provider: 'azurerm'
+      command: 'plan'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/Env/dev'
+      environmentServiceNameAzureRM: 'Ashok1'
+
+- job: manualapprovalJob
+  dependsOn: Job1
+  pool: Server
+
+  steps:
+  - task: ManualValidation@1
+    displayName: "Manual approval"
+    inputs:
+      notifyUsers: 'abc@gamil.com'
+
+- job: Job2
+  dependsOn: manualapprovaljob
+  pool: Default
+  steps:
+  - task: TerraformTaskV4@4
+    displayName: "TerraformInitPlan"
+    inputs:
+      provider: 'azurerm'
+      command: 'init'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/Env/dev'
+      backendServiceArm: 'Ashok1'
+      backendAzureRmResourceGroupName: 'pkrg'
+      backendAzureRmStorageAccountName: 'mystorage12345126'
+      backendAzureRmContainerName: 'pkcontainer'
+      backendAzureRmKey: 'dev.terraform.tfstate'
+  - task: TerraformTaskV4@4
+    displayName: "Terraform Apply"
+    inputs:
+      provider: 'azurerm'
+      command: 'apply'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/Env/dev'
+      environmentServiceNameAzureRM: 'Ashok1'

@@ -1,0 +1,47 @@
+trigger: none
+pool: Default
+stages:
+  - stage: stage1
+    jobs:
+      - job: Job1
+        displayName: terraforminitplan
+        steps:
+        - task: TerraformTaskV4@4
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/Environ/dev'
+            backendServiceArm: 'Ashok1'
+            backendAzureRmResourceGroupName: 'pkrg'
+            backendAzureRmStorageAccountName: 'merapehlastorage'
+            backendAzureRmContainerName: 'newcant'
+            backendAzureRmKey: 'infra.dev.tfstate'
+        - task: TerraformTaskV4@4
+          inputs:
+            provider: 'azurerm'
+            command: 'plan'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/Environ/dev'
+            environmentServiceNameAzureRM: 'Ashok1'
+  - stage: stage2
+    dependsOn: stage1
+    jobs:
+      - job: Job2
+        displayName: terraformapply
+        steps:
+
+        - task: TerraformTaskV4@4
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/Environ/dev'
+            backendServiceArm: 'Ashok1'
+            backendAzureRmResourceGroupName: 'pkrg'
+            backendAzureRmStorageAccountName: 'merapehlastorage'
+            backendAzureRmContainerName: 'newcant'
+            backendAzureRmKey: 'infra.dev.tfstate'
+        - task: TerraformTaskV4@4
+          inputs:
+            provider: 'azurerm'
+            command: 'apply'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/Environ/dev'
+            environmentServiceNameAzureRM: 'Ashok1'
