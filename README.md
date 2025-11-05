@@ -57,6 +57,22 @@ infra_code_azure/
 
 ----
 
+infra_code_azure/
+│
+├── virtualnetwork/          # Contains Virtual Network configuration files
+├── subnet/                  # Subnet-related templates and scripts
+├── resource/                # Resource Group or common resource definitions
+├── virtualmachine/          # VM deployment templates and parameters
+├── Public_ip/               # Public IP configuration files
+├── Nic/                     # Network Interface configurations
+├── Environ/                 # Environment-specific variable files
+│
+├── azure-infra_pipelines_by_ank.yml   # Main Azure DevOps pipeline
+├── azure-stage-pipelines.yml          # Stage-specific pipeline definition
+├── my_pipeline.yml                    # Custom pipeline configuration
+└── new_pipeline.yml                   # Experimental/new pipeline setup
+
+
 ⚙️ Setup & Deployment  
 
 1️⃣ Clone the Repository  
