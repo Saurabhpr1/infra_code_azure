@@ -39,38 +39,21 @@ URL: https://github.com/Saurabhpr1/infra_code_azure
 
 
 🏗️ Project Structure  
-
-----
+```bash
 infra_code_azure/
 │
-├── virtualnetwork/
-├── subnet/
-├── resource/
-├── virtualmachine/
-├── Public_ip/
-├── Nic/
-├── Environ/
-├── azure-infra_pipelines_by_ank.yml
-├── azure-stage-pipelines.yml
-├── my_pipeline.yml
-└── new_pipeline.yml
-
-----
-
-infra_code_azure/
-│
-├── virtualnetwork/          # Contains Virtual Network configuration files
-├── subnet/                  # Subnet-related templates and scripts
-├── resource/                # Resource Group or common resource definitions
-├── virtualmachine/          # VM deployment templates and parameters
-├── Public_ip/               # Public IP configuration files
-├── Nic/                     # Network Interface configurations
-├── Environ/                 # Environment-specific variable files
+├── virtualnetwork/                # Virtual Network configuration files
+├── subnet/                        # Subnet templates and scripts
+├── resource/                      # Resource group or shared resources
+├── virtualmachine/                # VM templates and parameters
+├── Public_ip/                     # Public IP configurations
+├── Nic/                           # Network Interface settings
+├── Environ/                       # Environment variable files
 │
 ├── azure-infra_pipelines_by_ank.yml   # Main Azure DevOps pipeline
 ├── azure-stage-pipelines.yml          # Stage-specific pipeline definition
 ├── my_pipeline.yml                    # Custom pipeline configuration
-└── new_pipeline.yml                   # Experimental/new pipeline setup
+└── new_pipeline.yml                   # Experimental/new pipeline
 
 
 ⚙️ Setup & Deployment  
