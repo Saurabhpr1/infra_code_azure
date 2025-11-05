@@ -18,7 +18,7 @@ URL: https://github.com/Saurabhpr1/infra_code_azure
 
 ---
 
-##🚀 Features  
+🚀 Features  
 - Automated creation of Azure networking and compute resources:  
   - Virtual Network (VNet), Subnets, Network Security Groups (NSGs)  
   - Virtual Machine(s), Public IP, NICs  
@@ -38,9 +38,9 @@ URL: https://github.com/Saurabhpr1/infra_code_azure
 - **Linux / Bash**   
 
 
-## 🏗️ Project Structure  
+🏗️ Project Structure  
 
-
+----
 infra_code_azure/
 │
 ├── virtualnetwork/
@@ -55,38 +55,36 @@ infra_code_azure/
 ├── my_pipeline.yml
 └── new_pipeline.yml
 
-````
+----
 
----
+⚙️ Setup & Deployment  
 
-## ⚙️ Setup & Deployment  
-
-### 1️⃣ Clone the Repository  
+1️⃣ Clone the Repository  
 ```bash
 git clone https://github.com/Saurabhpr1/infra_code_azure.git
 cd infra_code_azure
 ````
 
-### 2️⃣ Initialize Terraform
+2️⃣ Initialize Terraform
 
 ```bash
 terraform init
 ```
 
-### 3️⃣ Review / Validate Configuration
+3️⃣ Review / Validate Configuration
 
 ```bash
 terraform validate
 terraform plan -var-file="Environ/dev.tfvars"
 ```
 
-### 4️⃣ Deploy Infrastructure
+4️⃣ Deploy Infrastructure
 
 ```bash
 terraform apply -var-file="Environ/dev.tfvars" -auto-approve
 ```
 
-### 5️⃣ Destroy Infrastructure (optional)
+5️⃣ Destroy Infrastructure (optional)
 
 ```bash
 terraform destroy -var-file="Environ/dev.tfvars" -auto-approve
@@ -94,14 +92,14 @@ terraform destroy -var-file="Environ/dev.tfvars" -auto-approve
 
 ---
 
-## 🔐 State & Collaboration
+🔐 State & Collaboration
 
 * Use remote state backend (Azure Storage / Azure Blob) for storing state files and locking (if configured)
 * All infra code and pipeline definitions are version-controlled in GitHub
 
 ---
 
-## 🧩 Future Improvements
+🧩 Future Improvements
 
 * Add multi-region / multi-subscription support for Azure
 * Integrate monitoring & alerting using Azure Monitor or Prometheus
@@ -110,15 +108,16 @@ terraform destroy -var-file="Environ/dev.tfvars" -auto-approve
 
 ---
 
-## 👨‍💻 Author
+👨‍💻 Author
 
 **Saurabh Prajapati**
 DevOps Engineer
-[LinkedIn][(https://linkedin.com/in/saurabhprajapati1) | [Email](mailto:prajapatisaurabh417@gmail.com)
+[LinkedIn][(https://linkedin.com/in/saurabhprajapati1) 
+[Email](mailto:prajapatisaurabh417@gmail.com)
 
 ---
 
-## 🧠 Learning Outcomes
+🧠 Learning Outcomes
 
 Through this project I gained hands-on understanding of:
 
@@ -129,8 +128,4 @@ Through this project I gained hands-on understanding of:
 
 ---
 
-## 📎 Repository Link
 
-🔗 [GitHub Repository](https://github.com/Saurabhpr1/infra_code_azure)
-
-```
