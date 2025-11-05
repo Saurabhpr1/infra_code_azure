@@ -55,7 +55,7 @@ infra_code_azure/
 ├── my_pipeline.yml                    # Custom pipeline configuration
 └── new_pipeline.yml                   # Experimental/new pipeline
 
-
+----
 ⚙️ Setup & Deployment  
 
 1️⃣ Clone the Repository  
